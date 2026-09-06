@@ -1,0 +1,1691 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Math & Statistics Deck // Eng. Nasser (بشمهندس ناصر)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #07090e;
+    --bg-alt: #0d111a;
+    --panel: #121824;
+    --panel-2: #182030;
+    --panel-hover: #1e283d;
+    --line: #222e47;
+    --line-glow: rgba(139, 92, 246, 0.3);
+    --text: #e2e8f0;
+    --text-heading: #ffffff;
+    --muted: #94a3b8;
+    
+    /* Brand Accents */
+    --purple: #8b5cf6;
+    --purple-glow: rgba(139, 92, 246, 0.25);
+    --cyan: #06b6d4;
+    --cyan-glow: rgba(6, 182, 212, 0.25);
+    --emerald: #10b981;
+    --emerald-glow: rgba(16, 185, 129, 0.25);
+    --amber: #f59e0b;
+    --amber-glow: rgba(245, 158, 11, 0.25);
+    --rose: #f43f5e;
+    --rose-glow: rgba(244, 63, 94, 0.25);
+    --blue: #3b82f6;
+    --indigo: #6366f1;
+    --magenta: #d946ef;
+    
+    --radius-lg: 20px;
+    --radius-md: 14px;
+    --shadow-deck: 0 20px 40px -15px rgba(0, 0, 0, 0.7);
+    --shadow-card: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+  }
+
+  html[data-theme="light"] {
+    --bg: #f8fafc;
+    --bg-alt: #ffffff;
+    --panel: #ffffff;
+    --panel-2: #f1f5f9;
+    --panel-hover: #e2e8f0;
+    --line: #cbd5e1;
+    --line-glow: rgba(139, 92, 246, 0.2);
+    --text: #1e293b;
+    --text-heading: #0f172a;
+    --muted: #64748b;
+    
+    --purple: #7c3aed;
+    --cyan: #0891b2;
+    --emerald: #059669;
+    --amber: #d97706;
+    --rose: #e11d48;
+    --blue: #2563eb;
+    --indigo: #4f46e5;
+    --magenta: #c026d3;
+
+    --shadow-deck: 0 15px 35px -10px rgba(15, 23, 42, 0.08);
+    --shadow-card: 0 8px 25px -8px rgba(15, 23, 42, 0.06);
+  }
+
+  *{ box-sizing:border-box; }
+  html{ scroll-behavior:smooth; }
+  body{
+    margin:0;
+    background:
+      radial-gradient(1400px 800px at 50% -10%, rgba(139, 92, 246, 0.08), transparent 70%),
+      radial-gradient(1000px 600px at 90% 40%, rgba(6, 182, 212, 0.06), transparent 60%),
+      radial-gradient(1000px 600px at 10% 80%, rgba(16, 185, 129, 0.06), transparent 60%),
+      var(--bg);
+    color:var(--text);
+    font-family:'Plus Jakarta Sans', sans-serif;
+    -webkit-font-smoothing:antialiased;
+    min-height:100vh;
+    transition: background-color .4s ease, color .35s ease;
+  }
+
+  body, .top-dock, .card, .terminal-deck, table.ref, .badge, .note, .footer, #toTop, .theme-toggle, .search-box input{
+    transition: background-color .35s ease, border-color .35s ease, color .35s ease, box-shadow .35s ease, transform .25s ease;
+  }
+
+  ::selection{ background: var(--purple); color:#fff; }
+  a{ color:inherit; text-decoration:none; }
+
+  /* ---------- Scrollbar ---------- */
+  ::-webkit-scrollbar{ width:8px; height:8px; }
+  ::-webkit-scrollbar-track{ background: var(--bg); }
+  ::-webkit-scrollbar-thumb{ background: var(--line); border-radius:10px; }
+  ::-webkit-scrollbar-thumb:hover{ background: var(--purple); }
+
+  /* ---------- Progress Bar ---------- */
+  #progress{
+    position:fixed; top:0; left:0; height:4px; width:0%;
+    background: linear-gradient(90deg, var(--purple), var(--cyan), var(--emerald), var(--amber));
+    z-index:1000; transition:width .12s ease-out;
+    box-shadow: 0 0 16px var(--purple);
+  }
+
+  /* ---------- Top Floating Deck Header ---------- */
+  .top-dock{
+    position:sticky; top:12px; z-index:500;
+    max-width:1280px; margin:0 auto; padding:0 16px;
+  }
+  .dock-inner{
+    background: rgba(18, 24, 36, 0.85);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid var(--line);
+    border-radius: 20px;
+    padding: 10px 18px;
+    display: flex; align-items: center; justify-content: space-between; gap: 16px;
+    box-shadow: var(--shadow-deck);
+  }
+  html[data-theme="light"] .dock-inner{
+    background: rgba(255, 255, 255, 0.85);
+  }
+
+  .dock-brand{
+    display:flex; align-items:center; gap:12px; flex-shrink:0;
+  }
+  .brand-badge{
+    width:38px; height:38px; border-radius:12px;
+    background: linear-gradient(135deg, var(--purple), var(--cyan));
+    display:flex; align-items:center; justify-content:center;
+    font-size:18px; font-weight:800; color:#fff;
+    box-shadow: 0 0 15px var(--purple-glow);
+  }
+  .brand-meta{ display:flex; flex-direction:column; }
+  .brand-title{ font-family:'Cairo', sans-serif; font-weight:800; font-size:15px; color:var(--text-heading); line-height:1.2; }
+  .brand-sub{ font-size:11px; color:var(--muted); font-family:'JetBrains Mono', monospace; }
+
+  /* Top Navigation Pills */
+  .dock-nav{
+    display:flex; align-items:center; gap:6px; overflow-x:auto; padding:4px 0;
+    scrollbar-width:none;
+  }
+  .dock-nav::-webkit-scrollbar{ display:none; }
+  .nav-pill{
+    font-family:'JetBrains Mono', monospace; font-size:12px; font-weight:600;
+    padding:7px 14px; border-radius:10px; color:var(--muted);
+    white-space:nowrap; border:1px solid transparent; transition: all .2s ease;
+  }
+  .nav-pill:hover{ background: rgba(139, 92, 246, 0.1); color:var(--text-heading); }
+  .nav-pill.active{
+    background: linear-gradient(135deg, rgba(139,92,246,0.2), rgba(6,182,212,0.15));
+    border-color: var(--purple); color:var(--text-heading);
+    box-shadow: 0 4px 12px var(--purple-glow);
+  }
+
+  /* Dock Controls */
+  .dock-controls{ display:flex; align-items:center; gap:10px; flex-shrink:0; }
+  
+  .search-box{
+    position:relative; width:220px;
+  }
+  .search-box input{
+    width:100%; background:var(--panel-2); border:1px solid var(--line);
+    border-radius:10px; padding:7px 12px 7px 32px; font-size:12px;
+    color:var(--text); outline:none; font-family:'Plus Jakarta Sans', sans-serif;
+  }
+  .search-box input:focus{ border-color:var(--purple); box-shadow:0 0 0 3px var(--purple-glow); }
+  .search-icon{ position:absolute; left:10px; top:50%; transform:translateY(-50%); font-size:12px; color:var(--muted); }
+
+  .theme-toggle{
+    width:36px; height:36px; border-radius:10px;
+    background: var(--panel-2); border:1px solid var(--line);
+    display:flex; align-items:center; justify-content:center;
+    cursor:pointer; font-size:16px; user-select:none;
+  }
+  .theme-toggle:hover{ border-color:var(--purple); transform:scale(1.05); }
+
+  /* ---------- Hero Section ---------- */
+  .hero-container{
+    max-width:1280px; margin: 30px auto 10px; padding:0 24px;
+  }
+  .hero-card{
+    background: linear-gradient(135deg, var(--panel), var(--bg-alt));
+    border:1px solid var(--line); border-radius:var(--radius-lg);
+    padding:40px 48px; position:relative; overflow:hidden;
+    box-shadow: var(--shadow-deck);
+    display:grid; grid-template-columns: 1fr auto; gap:40px; align-items:center;
+  }
+  .hero-card::before{
+    content:''; position:absolute; inset:0;
+    background: radial-gradient(800px circle at top right, rgba(139, 92, 246, 0.15), transparent 60%);
+    pointer-events:none;
+  }
+  .hero-left{ position:relative; z-index:2; }
+  .author-badge{
+    display:inline-flex; align-items:center; gap:8px;
+    background: rgba(139, 92, 246, 0.12); border:1px solid rgba(139, 92, 246, 0.3);
+    padding:6px 14px; border-radius:30px; margin-bottom:18px;
+  }
+  .author-badge .dot{ width:8px; height:8px; border-radius:50%; background:var(--purple); box-shadow:0 0 8px var(--purple); }
+  .author-text{ font-family:'Cairo', sans-serif; font-weight:700; font-size:13px; color:var(--purple); }
+
+  h1.hero-title{
+    font-size:clamp(32px, 4vw, 48px); font-weight:800; line-height:1.15;
+    margin:0 0 16px; color:var(--text-heading);
+  }
+  h1.hero-title .gradient-text{
+    background: linear-gradient(90deg, var(--purple), var(--cyan), var(--emerald));
+    -webkit-background-clip:text; background-clip:text; color:transparent;
+  }
+  .hero-subtitle{
+    font-size:15px; color:var(--muted); max-width:620px; line-height:1.7; margin-bottom:26px;
+  }
+  .hero-chips{ display:flex; gap:10px; flex-wrap:wrap; }
+  .chip{
+    font-family:'JetBrains Mono', monospace; font-size:11px; font-weight:600;
+    padding:5px 12px; border-radius:6px; background:var(--panel-2);
+    border:1px solid var(--line); color:var(--muted);
+  }
+
+  /* Right Terminal Card */
+  .hero-right{ position:relative; z-index:2; min-width:320px; }
+  .terminal-deck{
+    background: #090d16; border:1px solid var(--line);
+    border-radius:var(--radius-md); padding:16px 20px;
+    font-family:'JetBrains Mono', monospace; font-size:13px; line-height:1.8;
+    box-shadow: 0 15px 30px rgba(0,0,0,0.5);
+  }
+  .terminal-header{ display:flex; gap:6px; margin-bottom:12px; padding-bottom:8px; border-bottom:1px solid rgba(255,255,255,0.08); }
+  .t-dot{ width:10px; height:10px; border-radius:50%; }
+  .t-dot.r{ background:#ef4444; } .t-dot.y{ background:#f59e0b; } .t-dot.g{ background:#10b981; }
+
+  /* ---------- Content Container ---------- */
+  .main-content{ max-width:1280px; margin:0 auto; padding: 20px 24px 100px; }
+
+  section.topic-module{
+    margin-top:50px; padding-top:20px;
+    opacity:0; transform:translateY(30px);
+    transition: opacity .7s cubic-bezier(.2,.7,.2,1), transform .7s cubic-bezier(.2,.7,.2,1);
+  }
+  section.topic-module.in-view{ opacity:1; transform:none; }
+
+  /* Module Themes */
+  section#linearalgebra{ --mod-accent: var(--purple); --mod-glow: var(--purple-glow); }
+  section#vectorops{ --mod-accent: var(--emerald); --mod-glow: var(--emerald-glow); }
+  section#matrixinverse{ --mod-accent: var(--rose); --mod-glow: var(--rose-glow); }
+  section#calculus{ --mod-accent: var(--blue); --mod-glow: rgba(59,130,246,0.25); }
+  section#statistics{ --mod-accent: var(--amber); --mod-glow: var(--amber-glow); }
+  section#correlation{ --mod-accent: var(--magenta); --mod-glow: rgba(217,70,239,0.25); }
+
+  .module-header{
+    display:flex; align-items:center; gap:16px; margin-bottom:12px;
+    padding-bottom:14px; border-bottom:2px solid var(--line);
+    position:relative;
+  }
+  .module-header::after{
+    content:''; position:absolute; left:0; bottom:-2px; height:2px; width:120px;
+    background: var(--mod-accent); box-shadow: 0 0 12px var(--mod-accent);
+  }
+  .module-num{
+    font-family:'JetBrains Mono', monospace; font-size:14px; font-weight:700;
+    color: var(--mod-accent); background: rgba(255,255,255,0.04);
+    border: 1px solid var(--mod-accent); padding:4px 12px; border-radius:8px;
+    box-shadow: 0 0 10px var(--mod-glow);
+  }
+  h2.module-title{
+    font-size:clamp(22px, 2.5vw, 28px); font-weight:700; margin:0; color:var(--text-heading);
+  }
+  .module-desc{ color:var(--muted); font-size:15px; line-height:1.7; max-width:800px; margin:0 0 24px; }
+  .module-desc code{ font-family:'JetBrains Mono', monospace; color:var(--amber); background:rgba(245,158,11,0.1); padding:2px 6px; border-radius:4px; }
+
+  /* Card Grid */
+  .deck-grid{
+    display:grid; grid-template-columns: repeat(auto-fit, minmax(360px, 1fr)); gap:20px; margin-bottom:20px;
+  }
+
+  .card{
+    background: var(--panel); border:1px solid var(--line);
+    border-radius: var(--radius-md); padding:20px 22px 14px;
+    box-shadow: var(--shadow-card); position:relative; overflow:hidden;
+    transition: all .25s ease;
+  }
+  .card:hover{
+    border-color: var(--mod-accent);
+    transform: translateY(-6px);
+    box-shadow: 0 18px 35px -10px var(--mod-glow);
+  }
+  .card-tag{
+    font-family:'JetBrains Mono', monospace; font-size:11px; font-weight:700;
+    letter-spacing:1px; text-transform:uppercase; color:var(--mod-accent);
+    margin-bottom:12px; display:flex; align-items:center; gap:6px;
+  }
+  .card-tag::before{ content:'//'; color:var(--muted); opacity:0.6; }
+
+  .code-wrap{ position:relative; }
+  pre.formula{
+    background: #080c14 !important; border:1px solid #1a2538;
+    border-radius:10px; padding:16px 18px !important;
+    font-family:'JetBrains Mono', monospace !important; font-size:13.5px !important;
+    line-height:1.9 !important; color:#e2e8f0 !important;
+    overflow-x:auto; white-space:pre-wrap; margin:0 !important;
+  }
+  pre.formula sub{ color:#6ee7b7; font-weight:600; }
+  pre.formula sup{ color:#fde047; font-weight:600; }
+
+  .copy-btn{
+    position:absolute; top:8px; right:8px; z-index:2;
+    font-family:'JetBrains Mono', monospace; font-size:10.5px;
+    background:var(--panel); border:1px solid var(--line); color:var(--muted);
+    padding:4px 10px; border-radius:6px; cursor:pointer; opacity:0; transition:all .2s ease;
+  }
+  .code-wrap:hover .copy-btn{ opacity:1; }
+  .copy-btn:hover{ color:var(--text-heading); border-color:var(--mod-accent); }
+  .copy-btn.copied{ color:var(--emerald); border-color:var(--emerald); opacity:1; }
+
+  /* Badges & Tables */
+  .badges{ display:flex; gap:8px; flex-wrap:wrap; margin: 10px 0 20px; }
+  .badge{
+    font-family:'JetBrains Mono', monospace; font-size:11.5px;
+    padding:5px 12px; border-radius:6px; background:var(--panel-2);
+    border:1px solid var(--line); color:var(--muted); transition:all .2s ease;
+  }
+  .badge:hover{ border-color:var(--mod-accent); color:var(--text-heading); transform:translateY(-2px); }
+
+  table.ref{
+    width:100%; border-collapse:collapse; margin: 16px 0 24px;
+    font-size:13.5px; background:var(--panel); border-radius:12px; overflow:hidden;
+    border:1px solid var(--line); box-shadow: var(--shadow-card);
+  }
+  table.ref th{
+    text-align:left; background:var(--panel-2); color:var(--mod-accent);
+    font-family:'JetBrains Mono', monospace; font-size:11.5px; text-transform:uppercase;
+    letter-spacing:.8px; padding:12px 16px; border-bottom:1px solid var(--line);
+    font-weight:700;
+  }
+  table.ref td{ padding:12px 16px; border-bottom:1px solid var(--line); color:var(--text); }
+  table.ref tr:last-child td{ border-bottom:none; }
+  table.ref code{ font-family:'JetBrains Mono', monospace; color:var(--amber); background:rgba(245,158,11,0.08); padding:2px 6px; border-radius:4px; }
+  table.ref tr:hover{ background: rgba(255,255,255,0.03); }
+
+  .note{
+    display:flex; gap:12px; align-items:flex-start;
+    background: rgba(245, 158, 11, 0.08); border:1px solid rgba(245, 158, 11, 0.3);
+    border-radius:12px; padding:14px 18px; margin: 20px 0 28px;
+    font-size:14px; color:var(--text); line-height:1.65;
+  }
+  .note::before{ content:'💡'; flex-shrink:0; font-size:18px; }
+
+  /* Footer */
+  .footer{
+    max-width:1280px; margin: 40px auto 0; padding: 40px 24px;
+    border-top:1px solid var(--line); display:flex; justify-content:space-between;
+    align-items:center; flex-wrap:wrap; gap:16px;
+    font-family:'JetBrains Mono', monospace; font-size:13px; color:var(--muted);
+  }
+  .footer-sig{ font-family:'Cairo', sans-serif; font-weight:800; font-size:18px; color:var(--purple); }
+
+  /* Scroll To Top */
+  #toTop{
+    position:fixed; bottom:24px; right:24px; z-index:400;
+    width:44px; height:44px; border-radius:12px;
+    background: var(--panel); border:1px solid var(--purple);
+    color:var(--purple); display:flex; align-items:center; justify-content:center;
+    cursor:pointer; opacity:0; pointer-events:none; transition: all .3s ease;
+    font-size:18px; box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+  }
+  #toTop.show{ opacity:1; pointer-events:auto; }
+  #toTop:hover{ background:var(--purple); color:#fff; transform:translateY(-3px); }
+
+  /* Tooltip */
+  .chart-tooltip{
+    position:fixed; z-index:999; pointer-events:none;
+    background: var(--panel-2); border:1px solid var(--purple);
+    color:var(--text); font-family:'JetBrains Mono', monospace;
+    font-size:12.5px; line-height:1.5; padding:8px 14px; border-radius:10px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+    opacity:0; transform: translateY(4px); transition: opacity .12s ease, transform .12s ease;
+    max-width:250px; white-space:pre-line;
+  }
+  .chart-tooltip.show{ opacity:1; transform: translateY(0); }
+
+  .card.hidden-by-search{ display:none !important; }
+
+  @media (max-width: 900px) {
+    .hero-card{ grid-template-columns: 1fr; padding:30px 24px; gap:24px; }
+    .hero-right{ min-width:100%; }
+    .dock-inner{ flex-wrap:wrap; }
+    .search-box{ width:100%; order:3; }
+  }
+</style>
+</head>
+<body>
+
+<div id="progress"></div>
+
+<!-- Top Floating Deck Header -->
+<header class="top-dock">
+  <div class="dock-inner">
+    <div class="dock-brand">
+      <div class="brand-badge">∑</div>
+      <div class="brand-meta">
+        <span class="brand-title">بشمهندس ناصر | Eng. Nasser</span>
+        <span class="brand-sub">Math &amp; Stats Deck</span>
+      </div>
+    </div>
+
+    <nav class="dock-nav">
+      <a href="#linearalgebra" class="navlink nav-pill active">01 Linear Algebra</a>
+      <a href="#vectorops" class="navlink nav-pill">02 Vectors</a>
+      <a href="#matrixinverse" class="navlink nav-pill">03 Matrix &amp; Eigen</a>
+      <a href="#calculus" class="navlink nav-pill">04 Calculus</a>
+      <a href="#statistics" class="navlink nav-pill">05 Statistics</a>
+      <a href="#correlation" class="navlink nav-pill">06 Correlation</a>
+    </nav>
+
+    <div class="dock-controls">
+      <div class="search-box">
+        <span class="search-icon">🔍</span>
+        <input type="text" id="searchInput" placeholder="Search formulas &amp; topics..." aria-label="Search deck">
+      </div>
+      <div class="theme-toggle" id="themeToggle" aria-label="Toggle light/dark mode"><span id="themeIcon">🌙</span></div>
+    </div>
+  </div>
+</header>
+
+<!-- Hero Section -->
+<div class="hero-container">
+  <div class="hero-card">
+    <div class="hero-left">
+      <div class="author-badge">
+        <span class="dot"></span>
+        <span class="author-text">Crafted by Eng. Nasser (بشمهندس ناصر)</span>
+      </div>
+      <h1 class="hero-title">The Math &amp; Stats<br><span class="gradient-text">Executive Reference Deck</span></h1>
+      <p class="hero-subtitle">Every core concept, one master deck: short explanations, real worked examples, and clear mathematical notation designed for effortless memory retention.</p>
+      <div class="hero-chips">
+        <span class="chip">01 · Scalars &amp; Vectors</span>
+        <span class="chip">02 · Dot &amp; Cross Product</span>
+        <span class="chip">03 · Eigenvalues</span>
+        <span class="chip">04 · Gradient Descent</span>
+        <span class="chip">05 · Distributions</span>
+        <span class="chip">06 · Correlation</span>
+      </div>
+    </div>
+
+    <div class="hero-right">
+      <div class="terminal-deck">
+        <div class="terminal-header">
+          <span class="t-dot r"></span><span class="t-dot y"></span><span class="t-dot g"></span>
+        </div>
+        <div style="color:var(--muted)">$ eng_nasser_math_deck --run</div>
+        <div style="color:var(--emerald);margin-top:6px;">∴ <span id="typed"></span><span style="animation:blink 1s infinite">|</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Main Content Modules -->
+<main class="main-content">
+
+  <!-- MODULE 01 LINEAR ALGEBRA -->
+  <section class="topic-module" id="linearalgebra">
+    <div class="module-header">
+      <span class="module-num">MODULE 01</span>
+      <h2 class="module-title">Scalars, Vectors, Matrices &amp; Tensors</h2>
+    </div>
+    <p class="module-desc">Linear algebra is the language of data. Every object you'll meet is just a <strong>tensor</strong> of a different rank — a single number, an arrow in space, a grid of numbers, or a stack of grids. Here's the full hierarchy, how to measure a vector, the different matrix families, and the two core matrix operations: multiplication and the determinant.</p>
+
+    <div class="badges">
+      <span class="badge">Scalar</span>
+      <span class="badge">Vector</span>
+      <span class="badge">Magnitude &amp; Direction</span>
+      <span class="badge">Matrix</span>
+      <span class="badge">Tensor</span>
+      <span class="badge">Matrix Multiplication</span>
+      <span class="badge">Determinant</span>
+    </div>
+
+    <div class="deck-grid">
+      <div class="card">
+        <div class="card-tag">scalar — rank 0</div>
+        <div class="code-wrap">
+          <button class="copy-btn">copy</button>
+          <pre class="formula">A scalar is a single real number.
+It has MAGNITUDE only — no direction.
+
+Notation: lowercase italic letters
+  a = 5,  k = -3,  π ≈ 3.14159
+
+Examples: temperature, mass, time,
+a person's age, a test score.</pre>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-tag">vector — rank 1</div>
+        <div class="code-wrap">
+          <button class="copy-btn">copy</button>
+          <pre class="formula">A vector is an ordered list of numbers.
+It has BOTH magnitude and direction.
+
+Notation: bold letter or arrow on top
+  v = (v<sub>1</sub>, v<sub>2</sub>, ..., v<sub>n</sub>)
+
+Example (2D vector):
+  v = (3, 4)
+
+Picture it as an arrow from the
+origin (0,0) to the point (3,4).</pre>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-tag">magnitude of a vector</div>
+        <div class="code-wrap">
+          <button class="copy-btn">copy</button>
+          <pre class="formula">Magnitude = the LENGTH of the vector
+(a single, non-negative scalar).
+
+  ‖v‖ = √(v<sub>1</sub>² + v<sub>2</sub>² + ... + v<sub>n</sub>²)
+
+Example — v = (3, 4):
+  ‖v‖ = √(3² + 4²)
+      = √(9 + 16)
+      = √25
+      = 5</pre>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-tag">direction of a vector</div>
+        <div class="code-wrap">
+          <button class="copy-btn">copy</button>
+          <pre class="formula">Direction = WHICH WAY the vector points.
+Two common ways to describe it:
+
+1) Unit vector (length 1, same direction):
+   v̂ = v ⁄ ‖v‖
+
+2) Angle from the x-axis (2D):
+   θ = tan⁻¹(v<sub>2</sub> ⁄ v<sub>1</sub>)
+
+Example — v = (3, 4), ‖v‖ = 5:
+   v̂ = (3/5, 4/5) = (0.6, 0.8)
+   θ = tan⁻¹(4/3) ≈ 53.13°</pre>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-tag">matrix — rank 2</div>
+        <div class="code-wrap">
+          <button class="copy-btn">copy</button>
+          <pre class="formula">A matrix is a rectangular grid of
+numbers arranged in rows &amp; columns.
+
+Notation: A = [a<sub>ij</sub>],  size m × n
+(m rows, n columns)
+
+Example — a 2×3 matrix:
+      ⎡ 1   2   3 ⎤
+  A = ⎣ 4   5   6 ⎦
+
+a<sub>12</sub> = 2  (row 1, column 2)
+a<sub>23</sub> = 6  (row 2, column 3)</pre>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-tag">types of matrices</div>
+        <div class="code-wrap">
+          <button class="copy-btn">copy</button>
+          <pre class="formula">Row matrix     — a single row (1×n)
+Column matrix  — a single column (m×1)
+Square matrix  — rows = columns (n×n)
+Zero matrix    — every entry is 0
+Identity (I)   — 1's on the diagonal,
+                 0's everywhere else
+Diagonal       — nonzero only on the
+                 main diagonal
+Symmetric      — A = Aᵀ (mirrors itself
+                 across the diagonal)
+Triangular     — all zeros above (lower)
+                 or below (upper) the
+                 main diagonal</pre>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-tag">tensor — rank 3+</div>
+        <div class="code-wrap">
+          <button class="copy-btn">copy</button>
+          <pre class="formula">A tensor generalizes scalars, vectors
+&amp; matrices to ANY number of dimensions.
+
+  Rank 0 → scalar     (a number)
+  Rank 1 → vector     (a line of numbers)
+  Rank 2 → matrix     (a grid of numbers)
+  Rank 3+ → tensor    (a stack of grids)
+
+Real example: a color photo is a
+rank-3 tensor — (height × width × color)</pre>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-tag">matrix operations</div>
+        <div class="code-wrap">
+          <button class="copy-btn">copy</button>
+          <pre class="formula">Addition / Subtraction — element by
+element; both matrices must be the
+SAME size.
+  [1 2]   [5 6]   [ 6  8]
+  [3 4] + [7 8] = [10 12]
+
+Scalar Multiplication — multiply every
+entry by the same number k.
+  2 × [1 2] = [2 4]
+      [3 4]   [6 8]
+
+Transpose (Aᵀ) — flip rows &amp; columns.
+  [1 2]ᵀ   [1 3]
+  [3 4]  = [2 4]</pre>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-tag">matrix multiplication</div>
+        <div class="code-wrap">
+          <button class="copy-btn">copy</button>
+          <pre class="formula">Rule: (m × n) · (n × p) → (m × p)
+The inner dimensions must match —
+columns of A = rows of B.
+
+  C<sub>ij</sub> = Σ A<sub>ik</sub> · B<sub>kj</sub>
+
+Example:
+  A = [1 2]   B = [5 6]
+      [3 4]       [7 8]
+
+  A·B = [1·5+2·7   1·6+2·8]  = [19 22]
+        [3·5+4·7   3·6+4·8]    [43 50]</pre>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-tag">why order matters (A·B ≠ B·A)</div>
+        <div class="code-wrap">
+          <button class="copy-btn">copy</button>
+          <pre class="formula">A = [1 2]     B = [0 1]
+    [3 4]         [1 0]
+
+A·B = [2 1]    B·A = [3 4]
+      [4 3]          [1 2]
+
+Matrix multiplication is generally
+NOT commutative — swapping the order
+gives a different result.</pre>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-tag">determinants</div>
+        <div class="code-wrap">
+          <button class="copy-btn">copy</button>
+          <pre class="formula">For a 2×2 matrix:
+      ⎡a  b⎤
+  A = ⎣c  d⎦     det(A) = ad − bc
+
+Example:
+      ⎡4  2⎤
+  A = ⎣3  1⎦     det(A) = 4·1 − 2·3 = −2
+
+A determinant of 0 means the matrix
+is "singular" — it has no inverse, and
+its rows/columns are linearly dependent.</pre>
+        </div>
+      </div>
+    </div>
+
+    <table class="ref">
+      <tr><th>Object</th><th>Rank</th><th>Looks like</th><th>Has</th></tr>
+      <tr><td>Scalar</td><td>0</td><td>5</td><td>Magnitude only</td></tr>
+      <tr><td>Vector</td><td>1</td><td>(2, 5, 1)</td><td>Magnitude &amp; direction</td></tr>
+      <tr><td>Matrix</td><td>2</td><td>a grid of rows &amp; columns</td><td>Rows, columns, a shape (m×n)</td></tr>
+      <tr><td>Tensor</td><td>3+</td><td>a stack of matrices</td><td>Any number of dimensions</td></tr>
+    </table>
+
+    <table class="ref">
+      <tr><th>Matrix Type</th><th>Defining Property</th></tr>
+      <tr><td>Identity (I)</td><td>1's on the diagonal, 0's elsewhere — acts like "1" in multiplication</td></tr>
+      <tr><td>Zero</td><td>Every single entry is 0</td></tr>
+      <tr><td>Diagonal</td><td>Only the main diagonal can be nonzero</td></tr>
+      <tr><td>Symmetric</td><td>Equal to its own transpose: A = Aᵀ</td></tr>
+      <tr><td>Triangular</td><td>All entries above (or below) the diagonal are 0</td></tr>
+    </table>
+
+    <div class="note">Matrix multiplication only works when the <strong>inner dimensions match</strong>: an <code>(m × n)</code> matrix can only multiply an <code>(n × p)</code> matrix, producing an <code>(m × p)</code> result. And remember — unlike regular number multiplication, <code>A·B</code> is almost never equal to <code>B·A</code>.</div>
+  </section>
+
+  <!-- MODULE 02 VECTOR OPERATIONS -->
+  <section class="topic-module" id="vectorops">
+    <div class="module-header">
+      <span class="module-num">MODULE 02</span>
+      <h2 class="module-title">Vector Operations, Dot &amp; Cross Product, Norms</h2>
+    </div>
+    <p class="module-desc">Beyond magnitude and direction, vectors have their own set of operations — ways to combine two vectors into a number, combine them into a new vector, or measure their size in different ways.</p>
+
+    <div class="badges">
+      <span class="badge">Vector Addition</span>
+      <span class="badge">Dot Product</span>
+      <span class="badge">Cross Product</span>
+      <span class="badge">Norms</span>
+      <span class="badge">Angle Between Vectors</span>
+    </div>
+
+    <div class="deck-grid">
+      <div class="card">
+        <div class="card-tag">vector addition, subtraction &amp; scaling</div>
+        <div class="code-wrap">
+          <button class="copy-btn">copy</button>
+          <pre class="formula">Add/subtract component by component.
+Scale by multiplying every component.
+
+u = (1, 2),  v = (3, 1)
+
+u + v = (1+3, 2+1) = (4, 3)
+u − v = (1−3, 2−1) = (−2, 1)
+3u    = (3·1, 3·2) = (3, 6)</pre>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-tag">dot product (scalar product)</div>
+        <div class="code-wrap">
+          <button class="copy-btn">copy</button>
+          <pre class="formula">The dot product turns TWO vectors
+into ONE number (a scalar).
+
+  u · v = u<sub>1</sub>v<sub>1</sub> + u<sub>2</sub>v<sub>2</sub> + ... + u<sub>n</sub>v<sub>n</sub>
+  u · v = ‖u‖ ‖v‖ cos θ
+
+Example — u = (1, 2, 3), v = (4, 5, 6):
+  u · v = 1·4 + 2·5 + 3·6
+        = 4 + 10 + 18 = 32
+
+If u · v = 0, the vectors are
+ORTHOGONAL (perpendicular).</pre>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-tag">cross product (vector product)</div>
+        <div class="code-wrap">
+          <button class="copy-btn">copy</button>
+          <pre class="formula">Only defined in 3D. Turns two vectors
+into a NEW vector, perpendicular
+to both of them.
+
+  u × v = (u<sub>2</sub>v<sub>3</sub> − u<sub>3</sub>v<sub>2</sub>,
+           u<sub>3</sub>v<sub>1</sub> − u<sub>1</sub>v<sub>3</sub>,
+           u<sub>1</sub>v<sub>2</sub> − u<sub>2</sub>v<sub>1</sub>)
+
+Example — u = (1, 0, 0), v = (0, 1, 0):
+  u × v = (0·0−0·1, 0·0−1·0, 1·1−0·0)
+        = (0, 0, 1)
+
+‖u × v‖ = ‖u‖‖v‖ sin θ
+        = area of the parallelogram
+          formed by u and v</pre>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-tag">norms — measuring vector length</div>
+        <div class="code-wrap">
+          <button class="copy-btn">copy</button>
+          <pre class="formula">A norm is a way to measure a
+vector's "size". Same vector,
+three different rulers:
+
+Example — v = (3, −4):
+
+L1 (Manhattan): ‖v‖₁ = Σ|v<sub>i</sub>|
+  = |3| + |−4| = 7
+
+L2 (Euclidean):  ‖v‖₂ = √(Σv<sub>i</sub>²)
+  = √(9 + 16) = 5   ← this is "magnitude"
+
+L∞ (Max norm):  ‖v‖∞ = max|v<sub>i</sub>|
+  = max(3, 4) = 4</pre>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-tag">angle between two vectors</div>
+        <div class="code-wrap">
+          <button class="copy-btn">copy</button>
+          <pre class="formula">Rearranging the dot product formula
+solves for the angle between u and v:
+
+  cos θ = (u · v) ⁄ (‖u‖ ‖v‖)
+
+Example — u = (1, 0), v = (1, 1):
+  u · v = 1·1 + 0·1 = 1
+  ‖u‖ = 1,  ‖v‖ = √2
+
+  cos θ = 1 ⁄ (1 · √2) = 1/√2
+  θ = 45°</pre>
+        </div>
+      </div>
+    </div>
+
+    <table class="ref">
+      <tr><th>Operation</th><th>Input → Output</th><th>Meaning</th></tr>
+      <tr><td>Dot Product</td><td>2 vectors → scalar</td><td>How much they point the same way</td></tr>
+      <tr><td>Cross Product</td><td>2 vectors → vector (3D only)</td><td>A new vector perpendicular to both</td></tr>
+      <tr><td>L2 Norm</td><td>1 vector → scalar</td><td>Straight-line length (= magnitude)</td></tr>
+      <tr><td>L1 Norm</td><td>1 vector → scalar</td><td>"City block" distance</td></tr>
+    </table>
+
+    <div class="note">Quick check for perpendicularity: two vectors are <strong>orthogonal</strong> exactly when their dot product is <code>0</code> — no need to compute any angle at all.</div>
+  </section>
+
+  <!-- MODULE 03 MATRIX INVERSE & EIGEN -->
+  <section class="topic-module" id="matrixinverse">
+    <div class="module-header">
+      <span class="module-num">MODULE 03</span>
+      <h2 class="module-title">Matrix Inverse, Eigenvalues &amp; Eigenvectors</h2>
+    </div>
+    <p class="module-desc">The inverse "undoes" a matrix, the same way dividing by 5 undoes multiplying by 5. Eigenvalues &amp; eigenvectors reveal the special directions a matrix stretches without rotating — both ideas build directly on the determinant.</p>
+
+    <div class="badges">
+      <span class="badge">Inverse Matrix (A⁻¹)</span>
+      <span class="badge">Identity Matrix</span>
+      <span class="badge">Eigenvalue (λ)</span>
+      <span class="badge">Eigenvector</span>
+      <span class="badge">Characteristic Equation</span>
+    </div>
+
+    <div class="deck-grid">
+      <div class="card">
+        <div class="card-tag">what is a matrix inverse?</div>
+        <div class="code-wrap">
+          <button class="copy-btn">copy</button>
+          <pre class="formula">The inverse of A, written A⁻¹,
+is the matrix that "undoes" A:
+
+  A · A⁻¹ = A⁻¹ · A = I
+
+Only SQUARE matrices can have an
+inverse, and only if det(A) ≠ 0.
+
+If det(A) = 0, A has NO inverse —
+it's called "singular".</pre>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-tag">finding the inverse of a 2×2 matrix</div>
+        <div class="code-wrap">
+          <button class="copy-btn">copy</button>
+          <pre class="formula">      ⎡a  b⎤            1    ⎡ d  −b⎤
+  A = ⎣c  d⎦   A⁻¹ = ─────· ⎣−c   a⎦
+                     det(A)
+
+Example — A = [4 2 ; 3 1], det(A) = −2:
+
+           1   ⎡ 1  −2⎤   ⎡−0.5   1 ⎤
+  A⁻¹ = ─────· ⎣−3   4⎦ = ⎣ 1.5  −2 ⎦
+          −2
+
+Check: A · A⁻¹ = I  ✓</pre>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-tag">why the inverse matters</div>
+        <div class="code-wrap">
+          <button class="copy-btn">copy</button>
+          <pre class="formula">The inverse solves systems of
+linear equations directly:
+
+  Ax = b
+  A⁻¹Ax = A⁻¹b
+  x = A⁻¹b
+
+So once you know A⁻¹, you can solve
+for x with any right-hand side b —
+no need to re-solve from scratch.</pre>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-tag">eigenvalues &amp; eigenvectors — the idea</div>
+        <div class="code-wrap">
+          <button class="copy-btn">copy</button>
+          <pre class="formula">For a square matrix A, an eigenvector
+v is a nonzero vector whose DIRECTION
+doesn't change when multiplied by A —
+it only gets stretched or shrunk.
+
+  A v = λ v
+
+  v = eigenvector (the direction)
+  λ = eigenvalue (the stretch factor)</pre>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-tag">finding eigenvalues</div>
+        <div class="code-wrap">
+          <button class="copy-btn">copy</button>
+          <pre class="formula">Solve the characteristic equation:
+
+  det(A − λI) = 0
+
+Example — A = [2 1 ; 1 2]:
+
+  det([2−λ  1 ; 1  2−λ]) = 0
+  (2−λ)² − 1 = 0
+  λ² − 4λ + 3 = 0
+  (λ−1)(λ−3) = 0
+
+  λ = 1   or   λ = 3</pre>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-tag">finding eigenvectors</div>
+        <div class="code-wrap">
+          <button class="copy-btn">copy</button>
+          <pre class="formula">For each λ, solve (A − λI)v = 0:
+
+For λ = 3:  [−1  1 ; 1  −1] v = 0
+  → v<sub>1</sub> = v<sub>2</sub>  →  v = (1, 1)
+
+For λ = 1:  [1  1 ; 1  1] v = 0
+  → v<sub>1</sub> = −v<sub>2</sub>  →  v = (1, −1)
+
+A stretches (1,1) by ×3 and
+(1,−1) by ×1 — its two special
+directions.</pre>
+        </div>
+      </div>
+    </div>
+
+    <table class="ref">
+      <tr><th>Concept</th><th>Meaning</th><th>Key Equation</th></tr>
+      <tr><td>Inverse (A⁻¹)</td><td>"Undoes" a matrix</td><td>A · A⁻¹ = I</td></tr>
+      <tr><td>Singular Matrix</td><td>Has no inverse</td><td>det(A) = 0</td></tr>
+      <tr><td>Eigenvalue (λ)</td><td>How much a special direction stretches</td><td>det(A − λI) = 0</td></tr>
+      <tr><td>Eigenvector (v)</td><td>The special direction itself</td><td>Av = λv</td></tr>
+    </table>
+
+    <div class="note">Every eigenvector of A stays on its own line when multiplied by A — it never rotates, only stretches by its eigenvalue. This is why eigenvalues/eigenvectors show up everywhere: from Google's PageRank to compressing images to finding the "principal directions" in a dataset.</div>
+  </section>
+
+  <!-- MODULE 04 CALCULUS -->
+  <section class="topic-module" id="calculus">
+    <div class="module-header">
+      <span class="module-num">MODULE 04</span>
+      <h2 class="module-title">Differentiation, Chain Rule &amp; Gradient Descent</h2>
+    </div>
+    <p class="module-desc">Calculus is the mathematics of <strong>change</strong>. This is where linear algebra meets motion — derivatives measure how fast something changes, and that single idea is the engine behind how machine learning models actually learn.</p>
+
+    <div class="badges">
+      <span class="badge">Derivative</span>
+      <span class="badge">Partial Derivative</span>
+      <span class="badge">Chain Rule</span>
+      <span class="badge">Gradient</span>
+      <span class="badge">Gradient Descent</span>
+      <span class="badge">Optimization</span>
+    </div>
+
+    <div class="deck-grid">
+      <div class="card">
+        <div class="card-tag">why calculus?</div>
+        <div class="code-wrap">
+          <button class="copy-btn">copy</button>
+          <pre class="formula">Calculus answers two core questions:
+
+  • How FAST is something changing?
+    → Differentiation
+
+  • How MUCH has accumulated?
+    → Integration
+
+In machine learning specifically,
+calculus is how models LEARN —
+the gradient tells an algorithm
+which direction reduces its error,
+and by how much to move.</pre>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-tag">differentiation — the basics</div>
+        <div class="code-wrap">
+          <button class="copy-btn">copy</button>
+          <pre class="formula">The derivative measures the
+INSTANTANEOUS rate of change
+of a function at a point.
+
+             f(x+h) − f(x)
+  f'(x) = lim ─────────────
+         h→0        h
+
+Power Rule:
+  f(x) = xⁿ   →   f'(x) = n·xⁿ⁻¹
+
+Example:
+  f(x) = x³   →  f'(x) = 3x²
+  f(x) = 5x²  →  f'(x) = 10x</pre>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-tag">more derivative rules</div>
+        <div class="code-wrap">
+          <button class="copy-btn">copy</button>
+          <pre class="formula">Constant Rule:
+  f(x) = c            → f'(x) = 0
+
+Sum Rule:
+  f(x) = g(x) + h(x)  → f'=g'+h'
+
+Product Rule:
+  f(x) = g(x)·h(x)
+  f'(x) = g'(x)h(x) + g(x)h'(x)
+
+Quotient Rule:
+  f(x) = g(x) ⁄ h(x)
+  f'(x) = [g'h − gh'] ⁄ h(x)²</pre>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-tag">partial derivatives</div>
+        <div class="code-wrap">
+          <button class="copy-btn">copy</button>
+          <pre class="formula">For functions of MULTIPLE variables,
+a partial derivative measures the
+rate of change w.r.t. ONE variable —
+holding all others fixed.
+
+  f(x, y) = x²y + y³
+
+  ∂f/∂x = 2xy       (y held constant)
+  ∂f/∂y = x² + 3y²  (x held constant)
+
+∂ (not d) signals "partial" —
+more than one variable is involved.</pre>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-tag">the chain rule</div>
+        <div class="code-wrap">
+          <button class="copy-btn">copy</button>
+          <pre class="formula">Differentiates a FUNCTION OF A
+FUNCTION (a composite function).
+
+Single variable:
+  y = f(g(x))
+  dy/dx = f'(g(x)) · g'(x)
+
+Example — y = (3x + 1)²:
+  let u = 3x+1  →  y = u²
+  dy/dx = 2u · 3 = 6(3x + 1)
+
+Multivariable (used constantly in
+neural network backpropagation):
+  ∂z/∂x = ∂z/∂y · ∂y/∂x</pre>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-tag">the gradient (∇)</div>
+        <div class="code-wrap">
+          <button class="copy-btn">copy</button>
+          <pre class="formula">The gradient collects ALL partial
+derivatives of a function into
+one vector.
+
+  ∇f(x, y) = ( ∂f/∂x , ∂f/∂y )
+
+It points toward the STEEPEST
+INCREASE of f. The opposite
+direction, −∇f, points toward
+the steepest decrease.
+
+Example — f(x,y) = x² + y²:
+  ∇f = (2x, 2y)
+  at (1, 2):  ∇f = (2, 4)</pre>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-tag">gradient descent</div>
+        <div class="code-wrap">
+          <button class="copy-btn">copy</button>
+          <pre class="formula">An iterative method for finding a
+function's MINIMUM by repeatedly
+stepping opposite the gradient.
+
+  θ_new = θ_old − α · ∇f(θ_old)
+
+  θ  = the parameters being tuned
+  α  = learning rate (step size)
+  ∇f = gradient at the current point
+
+Repeat until the gradient is
+(near) zero — that's a minimum.</pre>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-tag">optimization concepts</div>
+        <div class="code-wrap">
+          <button class="copy-btn">copy</button>
+          <pre class="formula">Critical Point: where f'(x) = 0
+(a candidate min, max, or
+saddle point)
+
+First Derivative Test:
+  f' goes  + → −   local MAXIMUM
+  f' goes  − → +   local MINIMUM
+
+Second Derivative Test:
+  f''(x) > 0  → local MINIMUM
+                (curves upward)
+  f''(x) < 0  → local MAXIMUM
+                (curves downward)
+
+Convex function: curves upward
+everywhere — any local minimum
+IS the global minimum.</pre>
+        </div>
+      </div>
+    </div>
+
+    <table class="ref">
+      <tr><th>Rule</th><th>Function</th><th>Derivative</th></tr>
+      <tr><td>Power</td><td>xⁿ</td><td>n·xⁿ⁻¹</td></tr>
+      <tr><td>Sum</td><td>g(x) + h(x)</td><td>g'(x) + h'(x)</td></tr>
+      <tr><td>Product</td><td>g(x)·h(x)</td><td>g'h + gh'</td></tr>
+      <tr><td>Chain</td><td>f(g(x))</td><td>f'(g(x)) · g'(x)</td></tr>
+    </table>
+
+    <table class="ref">
+      <tr><th>Concept</th><th>Condition</th><th>Meaning</th></tr>
+      <tr><td>Critical Point</td><td>f'(x) = 0</td><td>Candidate min, max, or saddle point</td></tr>
+      <tr><td>Local Minimum</td><td>f''(x) &gt; 0</td><td>Function curves upward here</td></tr>
+      <tr><td>Local Maximum</td><td>f''(x) &lt; 0</td><td>Function curves downward here</td></tr>
+      <tr><td>Convex Function</td><td>f''(x) ≥ 0 everywhere</td><td>Any local minimum is the global minimum</td></tr>
+    </table>
+
+    <div class="note">Gradient descent is just the multivariable version of walking downhill: check the slope (the gradient), take a step in the opposite direction, and repeat. This one idea — descend the gradient — is how nearly every machine learning model is trained.</div>
+  </section>
+
+  <!-- MODULE 05 STATISTICS -->
+  <section class="topic-module" id="statistics">
+    <div class="module-header">
+      <span class="module-num">MODULE 05</span>
+      <h2 class="module-title">Population, Sample &amp; Distributions</h2>
+    </div>
+    <p class="module-desc">Statistics is how we summarize data and reason about uncertainty. It starts with two questions — <strong>who are we measuring</strong> (population vs. sample) and <strong>where's the center</strong> — then moves on to how spread out the data is, and what shape it takes.</p>
+
+    <div class="badges">
+      <span class="badge">Population vs Sample</span>
+      <span class="badge">Mean / Median / Mode</span>
+      <span class="badge">Variance</span>
+      <span class="badge">Std Deviation</span>
+      <span class="badge">IQR</span>
+      <span class="badge">Distributions</span>
+      <span class="badge">Skewness</span>
+    </div>
+
+    <div class="deck-grid">
+      <div class="card">
+        <div class="card-tag">population vs. sample</div>
+        <div class="code-wrap">
+          <button class="copy-btn">copy</button>
+          <pre class="formula">Population = EVERY member of the
+group you care about. Size = N.
+
+Sample = a smaller subset actually
+measured/collected. Size = n.
+
+Notation differs on purpose:
+  Population    Sample
+  μ  (mean)     x̄  (mean)
+  σ  (st.dev)   s  (st.dev)
+  N  (size)     n  (size)
+
+We almost always study a SAMPLE and
+use it to estimate the population.</pre>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-tag">mean, median &amp; mode</div>
+        <div class="code-wrap">
+          <button class="copy-btn">copy</button>
+          <pre class="formula">Data: 4, 8, 6, 5, 3, 8, 9
+
+Mean (average):
+  x̄ = Σx / n = 43 / 7 ≈ 6.14
+
+Median (middle value, sorted):
+  3,4,5,6,8,8,9  →  median = 6
+
+Mode (most frequent value):
+  8 appears twice  →  mode = 8
+
+Mean is pulled by outliers;
+median usually isn't.</pre>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-tag">variance</div>
+        <div class="code-wrap">
+          <button class="copy-btn">copy</button>
+          <pre class="formula">Variance = the average SQUARED
+distance from the mean.
+
+Population:      Sample:
+  σ² = Σ(x−μ)²      s² = Σ(x−x̄)²
+       ────────          ────────
+          N                n − 1
+
+Sample uses (n−1), not n —
+"Bessel's correction" — it
+corrects the bias of estimating
+from a smaller subset.
+
+Example (x̄=6.14): each deviation
+is squared, summed, then divided.</pre>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-tag">standard deviation</div>
+        <div class="code-wrap">
+          <button class="copy-btn">copy</button>
+          <pre class="formula">Standard deviation = the SQUARE
+ROOT of variance — back in the
+original units of the data.
+
+  σ = √σ²        s = √s²
+
+Why take the root at all?
+Variance is in squared units
+(e.g. "dollars²") — std. dev.
+brings it back to "dollars",
+so it's directly comparable
+to the mean.
+
+Small σ → data clustered tight.
+Large σ → data spread wide.</pre>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-tag">IQR &amp; the five-number summary</div>
+        <div class="code-wrap">
+          <button class="copy-btn">copy</button>
+          <pre class="formula">Sort the data, then split it into
+quarters using three cut points:
+
+  Q1 = 25th percentile
+  Q2 = 50th percentile (= median)
+  Q3 = 75th percentile
+
+  IQR = Q3 − Q1
+  (the middle 50% of the data)
+
+Outlier rule of thumb — a value
+is an outlier if it falls
+outside:
+  [Q1 − 1.5·IQR,  Q3 + 1.5·IQR]</pre>
+        </div>
+
+        <svg viewBox="0 0 700 160" style="width:100%;height:auto;margin-top:10px;" role="img" aria-label="Boxplot diagram">
+          <line x1="40" y1="80" x2="660" y2="80" style="stroke:var(--line);stroke-width:1.5;stroke-dasharray:4,4" />
+          <line x1="80" y1="80" x2="220" y2="80" style="stroke:var(--amber);stroke-width:2.5" />
+          <line x1="440" y1="80" x2="560" y2="80" style="stroke:var(--amber);stroke-width:2.5" />
+          <line data-tip="Minimum" x1="80" y1="60" x2="80" y2="100" style="stroke:var(--amber);stroke-width:5;stroke-linecap:round" />
+          <line data-tip="Maximum" x1="560" y1="60" x2="560" y2="100" style="stroke:var(--amber);stroke-width:5;stroke-linecap:round" />
+          <rect data-tip="IQR (Q1 to Q3)" x="220" y="48" width="220" height="64" rx="8" style="fill:rgba(245,158,11,0.2);stroke:var(--amber);stroke-width:2" />
+          <line data-tip="Median (Q2)" x1="320" y1="48" x2="320" y2="112" style="stroke:var(--emerald);stroke-width:4" />
+          <circle data-tip="Outlier" cx="630" cy="80" r="6" style="fill:var(--rose);stroke:var(--bg);stroke-width:2" />
+          <text x="80" y="130" text-anchor="middle" style="fill:var(--muted);font-size:12px;font-family:'JetBrains Mono',monospace">Min</text>
+          <text x="220" y="130" text-anchor="middle" style="fill:var(--text);font-size:12px;font-family:'JetBrains Mono',monospace;font-weight:600">Q1</text>
+          <text x="320" y="130" text-anchor="middle" style="fill:var(--emerald);font-size:12px;font-family:'JetBrains Mono',monospace;font-weight:700">Median</text>
+          <text x="440" y="130" text-anchor="middle" style="fill:var(--text);font-size:12px;font-family:'JetBrains Mono',monospace;font-weight:600">Q3</text>
+          <text x="560" y="130" text-anchor="middle" style="fill:var(--muted);font-size:12px;font-family:'JetBrains Mono',monospace">Max</text>
+          <text x="630" y="112" text-anchor="middle" style="fill:var(--rose);font-size:11px;font-family:'JetBrains Mono',monospace;font-weight:600">outlier</text>
+        </svg>
+      </div>
+
+      <div class="card">
+        <div class="card-tag">from data to distribution — a histogram</div>
+        <div class="code-wrap">
+          <button class="copy-btn">copy</button>
+          <pre class="formula">A histogram groups raw data into
+"bins" (ranges) and counts how many
+values fall in each one.
+
+Exam scores, grouped into bins:
+  50-60 → 3 students
+  60-70 → 8 students
+  70-80 → 15 students
+  80-90 → 10 students
+  90-100 → 4 students
+
+As bins get finer and the sample
+grows, the jagged bars smooth out
+into a continuous DISTRIBUTION —
+often a normal curve, like below.</pre>
+        </div>
+
+        <svg viewBox="0 0 700 240" style="width:100%;height:auto;margin-top:10px;" role="img" aria-label="Histogram">
+          <line x1="40" y1="200" x2="610" y2="200" style="stroke:var(--line);stroke-width:1.5" />
+          <rect data-tip="50–60: 3 students" x="60" y="164" width="90" height="36" rx="4" style="fill:rgba(245,158,11,0.6);stroke:var(--amber);stroke-width:1.5" />
+          <rect data-tip="60–70: 8 students" x="170" y="104" width="90" height="96" rx="4" style="fill:rgba(245,158,11,0.6);stroke:var(--amber);stroke-width:1.5" />
+          <rect data-tip="70–80: 15 students" x="280" y="20" width="90" height="180" rx="4" style="fill:rgba(245,158,11,0.6);stroke:var(--amber);stroke-width:1.5" />
+          <rect data-tip="80–90: 10 students" x="390" y="80" width="90" height="120" rx="4" style="fill:rgba(245,158,11,0.6);stroke:var(--amber);stroke-width:1.5" />
+          <rect data-tip="90–100: 4 students" x="500" y="152" width="90" height="48" rx="4" style="fill:rgba(245,158,11,0.6);stroke:var(--amber);stroke-width:1.5" />
+          <path d="M105,164 Q215,90 325,16 T545,152" style="fill:none;stroke:var(--cyan);stroke-width:3;stroke-dasharray:5,4" />
+          <g style="fill:var(--muted);font-size:11px;font-family:'JetBrains Mono',monospace" text-anchor="middle">
+            <text x="105" y="218">50-60</text><text x="215" y="218">60-70</text><text x="325" y="218">70-80</text><text x="435" y="218">80-90</text><text x="545" y="218">90-100</text>
+          </g>
+        </svg>
+      </div>
+
+      <div class="card">
+        <div class="card-tag">the normal distribution &amp; 68-95-99.7 rule</div>
+        <div class="code-wrap">
+          <button class="copy-btn">copy</button>
+          <pre class="formula">The "bell curve" — symmetric,
+centered on the mean μ, spread
+controlled by σ.
+
+For any normal distribution:
+  68.0% of data falls within ±1σ
+  95.0% of data falls within ±2σ
+  99.7% of data falls within ±3σ
+
+Mean = Median = Mode
+(all three sit at the exact
+center of the curve)</pre>
+        </div>
+
+        <svg viewBox="0 0 700 240" style="width:100%;height:auto;margin-top:10px;" role="img" aria-label="Normal Distribution">
+          <path d="M50,190 Q350,10 650,190" style="fill:none;stroke:var(--amber);stroke-width:3" />
+          <line x1="350" y1="190" x2="350" y2="20" style="stroke:var(--emerald);stroke-width:2;stroke-dasharray:4,4" />
+          <line x1="30" y1="190" x2="670" y2="190" style="stroke:var(--line);stroke-width:1.5" />
+          <text x="350" y="210" text-anchor="middle" style="fill:var(--emerald);font-size:12px;font-family:'JetBrains Mono',monospace;font-weight:700">μ (Mean)</text>
+        </svg>
+      </div>
+
+      <div class="card">
+        <div class="card-tag">skewness — reading the shape</div>
+        <div class="code-wrap">
+          <button class="copy-btn">copy</button>
+          <pre class="formula">Skewness measures the ASYMMETRY
+of a distribution's tail.
+
+Right-skewed (positive skew):
+  long tail →  Mean &gt; Median &gt; Mode
+  e.g. income, house prices
+
+Left-skewed (negative skew):
+  long tail ←  Mean &lt; Median &lt; Mode
+  e.g. age at retirement, exam
+  scores capped near 100
+
+Symmetric (zero skew):
+  Mean = Median = Mode
+  e.g. a true normal distribution</pre>
+        </div>
+      </div>
+    </div>
+
+    <table class="ref">
+      <tr><th>Measure</th><th>Population</th><th>Sample</th></tr>
+      <tr><td>Mean</td><td>μ = Σx / N</td><td>x̄ = Σx / n</td></tr>
+      <tr><td>Variance</td><td>σ² = Σ(x−μ)² / N</td><td>s² = Σ(x−x̄)² / (n−1)</td></tr>
+      <tr><td>Std. Deviation</td><td>σ = √σ²</td><td>s = √s²</td></tr>
+    </table>
+
+    <table class="ref">
+      <tr><th>Skew Direction</th><th>Tail</th><th>Order of Center Measures</th></tr>
+      <tr><td>Right-skewed (positive)</td><td>Stretches right</td><td>Mode &lt; Median &lt; Mean</td></tr>
+      <tr><td>Symmetric (zero skew)</td><td>None</td><td>Mode = Median = Mean</td></tr>
+      <tr><td>Left-skewed (negative)</td><td>Stretches left</td><td>Mean &lt; Median &lt; Mode</td></tr>
+    </table>
+
+    <div class="note">Quick memory trick: the <strong>mean chases the tail</strong>. In a right-skewed distribution the tail points right, so the mean gets pulled right of the median. When your mean and median are far apart, that gap itself is a strong clue that your data is skewed, not symmetric.</div>
+  </section>
+
+  <!-- MODULE 06 CORRELATION -->
+  <section class="topic-module" id="correlation">
+    <div class="module-header">
+      <span class="module-num">MODULE 06</span>
+      <h2 class="module-title">Covariance, Correlation &amp; Scatter Plots</h2>
+    </div>
+    <p class="module-desc">Once you can describe one variable, the natural next question is: how do <strong>two</strong> variables relate? Covariance and correlation both answer that — and a scatter plot lets you see the answer before you even calculate it.</p>
+
+    <div class="badges">
+      <span class="badge">Covariance</span>
+      <span class="badge">Correlation Coefficient (r)</span>
+      <span class="badge">Scatter Plot</span>
+      <span class="badge">Correlation ≠ Causation</span>
+    </div>
+
+    <div class="deck-grid">
+      <div class="card">
+        <div class="card-tag">covariance</div>
+        <div class="code-wrap">
+          <button class="copy-btn">copy</button>
+          <pre class="formula">Covariance shows whether two
+variables move TOGETHER or
+OPPOSITELY — but its size depends
+on the units, so it's hard to
+compare across datasets.
+
+  Cov(X,Y) = Σ(x−x̄)(y−ȳ) / (n−1)
+
+  Cov &gt; 0  → move together
+  Cov &lt; 0  → move oppositely
+  Cov ≈ 0  → no linear relationship</pre>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-tag">correlation coefficient (r)</div>
+        <div class="code-wrap">
+          <button class="copy-btn">copy</button>
+          <pre class="formula">Correlation FIXES covariance's unit
+problem — it's normalized, always
+between −1 and +1.
+
+           Cov(X,Y)
+  r =  ─────────────
+         σ_x · σ_y
+
+  r = +1  → perfect positive line
+  r = −1  → perfect negative line
+  r =  0  → no linear relationship</pre>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-tag">interpreting the strength of r</div>
+        <div class="code-wrap">
+          <button class="copy-btn">copy</button>
+          <pre class="formula">|r| ≥ 0.7          → strong
+0.3 ≤ |r| &lt; 0.7    → moderate
+|r| &lt; 0.3          → weak
+
+The SIGN tells you the direction
+(positive or negative).
+The SIZE tells you the strength
+(how tightly points hug a line).
+
+Note: r only measures LINEAR
+relationships — two variables can
+be strongly related in a curve
+and still have r ≈ 0.</pre>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-tag">correlation ≠ causation</div>
+        <div class="code-wrap">
+          <button class="copy-btn">copy</button>
+          <pre class="formula">A strong correlation does NOT mean
+one variable CAUSES the other.
+
+Classic example: ice cream sales
+and drowning deaths correlate
+strongly — both rise in summer.
+
+Ice cream doesn't cause drowning.
+A hidden 3rd variable — HOT
+WEATHER — drives both.
+
+Always ask: could a hidden
+variable explain both?</pre>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-tag">scatter plots — seeing the relationship</div>
+        <div class="code-wrap">
+          <button class="copy-btn">copy</button>
+          <pre class="formula">A scatter plot puts one variable
+on each axis and plots every
+(x, y) pair as a point.
+
+The overall SHAPE the points make
+tells you the correlation before
+you calculate anything:
+
+  climbs left→right   → positive
+  falls left→right    → negative
+  no visible pattern  → ~zero</pre>
+        </div>
+
+        <svg viewBox="0 0 700 150" style="width:100%;height:auto;margin-top:10px;" role="img" aria-label="Scatter Plot">
+          <text x="125" y="12" text-anchor="middle" style="fill:var(--text);font-size:11px;font-family:'JetBrains Mono',monospace">Positive (r ≈ 0.9)</text>
+          <line x1="30" y1="120" x2="220" y2="120" style="stroke:var(--line);stroke-width:1" />
+          <line x1="30" y1="120" x2="30" y2="20" style="stroke:var(--line);stroke-width:1" />
+          <line x1="35" y1="115" x2="215" y2="25" style="stroke:var(--magenta);stroke-width:2;stroke-dasharray:4,3" />
+          <circle cx="45" cy="105" r="4" style="fill:var(--cyan)" />
+          <circle cx="80" cy="85" r="4" style="fill:var(--cyan)" />
+          <circle cx="120" cy="65" r="4" style="fill:var(--cyan)" />
+          <circle cx="160" cy="45" r="4" style="fill:var(--cyan)" />
+          <circle cx="200" cy="30" r="4" style="fill:var(--cyan)" />
+
+          <text x="345" y="12" text-anchor="middle" style="fill:var(--text);font-size:11px;font-family:'JetBrains Mono',monospace">Negative (r ≈ −0.85)</text>
+          <line x1="250" y1="120" x2="440" y2="120" style="stroke:var(--line);stroke-width:1" />
+          <line x1="250" y1="120" x2="250" y2="20" style="stroke:var(--line);stroke-width:1" />
+          <line x1="255" y1="25" x2="435" y2="115" style="stroke:var(--magenta);stroke-width:2;stroke-dasharray:4,3" />
+          <circle cx="265" cy="30" r="4" style="fill:var(--cyan)" />
+          <circle cx="305" cy="50" r="4" style="fill:var(--cyan)" />
+          <circle cx="345" cy="70" r="4" style="fill:var(--cyan)" />
+          <circle cx="385" cy="90" r="4" style="fill:var(--cyan)" />
+          <circle cx="425" cy="110" r="4" style="fill:var(--cyan)" />
+
+          <text x="565" y="12" text-anchor="middle" style="fill:var(--text);font-size:11px;font-family:'JetBrains Mono',monospace">~Zero (r ≈ 0.05)</text>
+          <line x1="470" y1="120" x2="660" y2="120" style="stroke:var(--line);stroke-width:1" />
+          <line x1="470" y1="120" x2="470" y2="20" style="stroke:var(--line);stroke-width:1" />
+          <circle cx="490" cy="40" r="4" style="fill:var(--cyan)" />
+          <circle cx="520" cy="100" r="4" style="fill:var(--cyan)" />
+          <circle cx="560" cy="30" r="4" style="fill:var(--cyan)" />
+          <circle cx="600" cy="80" r="4" style="fill:var(--cyan)" />
+          <circle cx="640" cy="50" r="4" style="fill:var(--cyan)" />
+        </svg>
+      </div>
+    </div>
+
+    <table class="ref">
+      <tr><th>|r| range</th><th>Strength</th><th>Scatter Plot Looks Like</th></tr>
+      <tr><td>0.7 – 1.0</td><td>Strong</td><td>Points hug a clear line</td></tr>
+      <tr><td>0.3 – 0.7</td><td>Moderate</td><td>A visible trend, but loosely scattered</td></tr>
+      <tr><td>0.0 – 0.3</td><td>Weak / none</td><td>No visible pattern, points everywhere</td></tr>
+    </table>
+
+    <div class="note">Before calculating <code>r</code>, plot the data first. A scatter plot instantly reveals things a single number can hide — like a strong <em>curved</em> relationship that has almost no <em>linear</em> correlation at all.</div>
+  </section>
+
+</main>
+
+<footer class="footer">
+  <div>Math &amp; Statistics Deck — Executive Reference</div>
+  <div class="footer-sig">بشمهندس ناصر (Eng. Nasser)</div>
+  <div>© 2026 Eng. Nasser Deck</div>
+</footer>
+
+<div id="toTop">↑</div>
+<div id="chartTooltip" class="chart-tooltip"></div>
+
+<script>
+  // Theme Toggle
+  const html = document.documentElement;
+  const themeToggle = document.getElementById('themeToggle');
+  const themeIcon = document.getElementById('themeIcon');
+  let isLight = false;
+
+  themeToggle.addEventListener('click', () => {
+    isLight = !isLight;
+    html.setAttribute('data-theme', isLight ? 'light' : 'dark');
+    themeIcon.textContent = isLight ? '☀️' : '🌙';
+  });
+
+  // Terminal Typing Animation
+  const typedEl = document.getElementById('typed');
+  const phrases = [
+    '‖v‖ = √(v₁² + v₂² + ... + vₙ²)',
+    'det(A) = ad − bc',
+    'A · A⁻¹ = A⁻¹ · A = I',
+    'Cᵢⱼ = Σ Aᵢₖ · Bₖⱼ',
+    'Eng. Nasser Deck Activated'
+  ];
+  let pIdx = 0, cIdx = 0, deleting = false;
+
+  function typeLoop(){
+    const current = phrases[pIdx];
+    if(!deleting){
+      typedEl.textContent = current.slice(0, cIdx + 1);
+      cIdx++;
+      if(cIdx === current.length){ deleting = true; setTimeout(typeLoop, 1600); return; }
+    } else {
+      typedEl.textContent = current.slice(0, cIdx - 1);
+      cIdx--;
+      if(cIdx === 0){ deleting = false; pIdx = (pIdx + 1) % phrases.length; }
+    }
+    setTimeout(typeLoop, deleting ? 25 : 40);
+  }
+  typeLoop();
+
+  // Scroll Reveal & Active Nav Pill
+  const topics = document.querySelectorAll('section.topic-module');
+  const navPills = document.querySelectorAll('.dock-nav .nav-pill');
+  const progress = document.getElementById('progress');
+  const toTop = document.getElementById('toTop');
+
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('in-view'); });
+  }, { threshold: 0.08 });
+  topics.forEach(t => io.observe(t));
+
+  function onScroll(){
+    const scrollTop = window.scrollY;
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    progress.style.width = (docHeight > 0 ? (scrollTop / docHeight) * 100 : 0) + '%';
+    toTop.classList.toggle('show', scrollTop > 350);
+
+    let current = '';
+    topics.forEach(sec => {
+      const rect = sec.getBoundingClientRect();
+      if(rect.top <= 180 && rect.bottom > 180) current = sec.id;
+    });
+    navPills.forEach(pill => {
+      pill.classList.toggle('active', pill.getAttribute('href') === '#' + current);
+    });
+  }
+  document.addEventListener('scroll', onScroll, { passive:true });
+  onScroll();
+
+  toTop.addEventListener('click', () => window.scrollTo({ top:0, behavior:'smooth' }));
+
+  // Live Search Filtering
+  const searchInput = document.getElementById('searchInput');
+  const cards = document.querySelectorAll('.card');
+
+  searchInput.addEventListener('input', (e) => {
+    const q = e.target.value.toLowerCase().trim();
+    if(!q){
+      cards.forEach(c => c.classList.remove('hidden-by-search'));
+      topics.forEach(t => t.style.display = '');
+      return;
+    }
+    topics.forEach(sec => {
+      let hasVisible = false;
+      const secCards = sec.querySelectorAll('.card');
+      secCards.forEach(c => {
+        if(c.innerText.toLowerCase().includes(q)){
+          c.classList.remove('hidden-by-search');
+          hasVisible = true;
+        } else {
+          c.classList.add('hidden-by-search');
+        }
+      });
+      sec.style.display = hasVisible ? '' : 'none';
+    });
+  });
+
+  // Chart Tooltips
+  const chartTip = document.getElementById('chartTooltip');
+  document.querySelectorAll('[data-tip]').forEach(el => {
+    el.addEventListener('mouseenter', () => {
+      chartTip.textContent = el.getAttribute('data-tip');
+      chartTip.classList.add('show');
+    });
+    el.addEventListener('mousemove', (e) => {
+      chartTip.style.left = (e.clientX + 14) + 'px';
+      chartTip.style.top = (e.clientY + 14) + 'px';
+    });
+    el.addEventListener('mouseleave', () => chartTip.classList.remove('show'));
+  });
+
+  // Copy Buttons
+  document.querySelectorAll('.copy-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const code = btn.nextElementSibling.innerText;
+      navigator.clipboard.writeText(code).then(() => {
+        btn.textContent = 'copied ✓';
+        btn.classList.add('copied');
+        setTimeout(() => { btn.textContent = 'copy'; btn.classList.remove('copied'); }, 1500);
+      });
+    });
+  });
+</script>
+
+</body>
+</html>
